@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/constants/app_constants.dart';
 import '../../core/storage/study_progress_controller.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/catalog.dart';
 import '../../data/subjects/subjects_data.dart';
 import '../../models/learning_models.dart';
 import '../../shared/widgets/common_widgets.dart';
+import '../../shared/widgets/brand_logo.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -48,21 +48,12 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  AppConstants.appName,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                    height: 1.1,
-                  ),
+                const BrandLogo(
+                  onDark: true,
+                  symbolSize: 56,
+                  showSubtitle: true,
                 ),
-                const SizedBox(height: 6),
-                const Text(
-                  AppConstants.appSubtitle,
-                  style: TextStyle(color: Color(0xFFCCFBF1), fontSize: 16),
-                ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 Text(
                   '등록 콘텐츠 · 강의 ${Catalog.lessonCount} · 공식 ${Catalog.formulaCount} · '
                   '문제 ${Catalog.questionCount} · 용어 ${Catalog.termCount} · '

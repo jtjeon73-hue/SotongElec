@@ -1,25 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <base href="$FLUTTER_BASE_HREF">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="SotongElec 전기기사 합격 학습관 — 필기·실기 이론, 공식, 기출유형, 모의고사, 계산기">
+  <meta name="description" content="전기기사 필기·실기 이론, 공식, 문제, 계산기와 오답관리를 제공하는 종합 학습 플랫폼">
+  <meta name="theme-color" content="#0B1F3A">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SotongElec">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-  <link rel="icon" type="image/png" href="favicon.png"/>
-  <title>SotongElec · 전기기사 합격 학습관</title>
+  <meta property="og:title" content="SotongElec · 전기기사 합격 학습관">
+  <meta property="og:description" content="전기기사 필기·실기 이론, 공식, 문제, 계산기와 오답관리를 제공하는 종합 학습 플랫폼">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" sizes="32x32" href="sotong-elec-favicon.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="icons/sotong-elec-48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/sotong-elec-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/sotong-elec-180.png">
   <link rel="manifest" href="manifest.json">
+  <title>SotongElec · 전기기사 합격 학습관</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: "Noto Sans KR", sans-serif; background: #F5F7FB; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0B1F3A;
+      font-family: "Noto Sans KR", sans-serif;
+    }
+    .boot {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      color: #E2E8F0;
+    }
+    .boot img {
+      width: 72px;
+      height: 72px;
+    }
+    .boot .name {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+    .boot .sub {
+      font-size: 13px;
+      color: #94A3B8;
+    }
   </style>
 </head>
 <body>
+  <div class="boot" id="boot">
+    <img src="icons/sotong-elec-192.png" alt="SotongElec" width="72" height="72">
+    <div class="name">SotongElec</div>
+    <div class="sub">전기기사 합격 학습관</div>
+  </div>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var boot = document.getElementById('boot');
+      if (boot) boot.remove();
+    });
+  </script>
 </body>
 </html>

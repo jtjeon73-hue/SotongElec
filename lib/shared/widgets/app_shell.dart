@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_theme.dart';
+import 'brand_logo.dart';
 
 class NavItem {
   const NavItem({
@@ -150,15 +151,11 @@ class AppShell extends StatelessWidget {
     if (isMobile) {
       return Scaffold(
         appBar: AppBar(
-          title: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(AppConstants.appName, style: TextStyle(fontSize: 16)),
-              Text(
-                AppConstants.appSubtitle,
-                style: TextStyle(fontSize: 11, color: Colors.white70),
-              ),
-            ],
+          title: const BrandLogo(
+            compact: false,
+            onDark: true,
+            symbolSize: 32,
+            showSubtitle: true,
           ),
           actions: [
             IconButton(
@@ -172,12 +169,9 @@ class AppShell extends StatelessWidget {
           child: SafeArea(
             child: Column(
               children: [
-                const ListTile(
-                  title: Text(
-                    AppConstants.appName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(AppConstants.appSubtitle),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: BrandLogo(onDark: false, symbolSize: 40),
                 ),
                 const Divider(),
                 Expanded(child: _NavList(location: location)),
@@ -330,28 +324,10 @@ class _SideNav extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(collapsed ? 12 : 20),
               child: collapsed
-                  ? const Icon(Icons.bolt, color: AppColors.tealLight, size: 28)
-                  : const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppConstants.appName,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          AppConstants.appSubtitle,
-                          style: TextStyle(
-                            color: Color(0xFF94A3B8),
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+                  ? const Center(
+                      child: BrandLogo(compact: true, symbolSize: 36),
+                    )
+                  : const BrandLogo(symbolSize: 44, onDark: true),
             ),
             Expanded(
               child: _NavList(location: location, collapsed: collapsed),

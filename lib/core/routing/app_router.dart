@@ -39,9 +39,8 @@ class AppRouter {
           ),
           GoRoute(
             path: '/written/:subjectId',
-            builder: (context, state) => SubjectPage(
-              subjectId: state.pathParameters['subjectId']!,
-            ),
+            builder: (context, state) =>
+                SubjectPage(subjectId: state.pathParameters['subjectId']!),
           ),
           GoRoute(
             path: '/lesson/:id',
@@ -50,9 +49,8 @@ class AppRouter {
           ),
           GoRoute(
             path: '/questions',
-            builder: (context, state) => QuestionBankPage(
-              initialId: state.uri.queryParameters['id'],
-            ),
+            builder: (context, state) =>
+                QuestionBankPage(initialId: state.uri.queryParameters['id']),
           ),
           GoRoute(
             path: '/mock',
@@ -60,21 +58,18 @@ class AppRouter {
           ),
           GoRoute(
             path: '/practical',
-            builder: (context, state) => PracticalHubPage(
-              category: state.uri.queryParameters['cat'],
-            ),
+            builder: (context, state) =>
+                PracticalHubPage(category: state.uri.queryParameters['cat']),
           ),
           GoRoute(
             path: '/practical/item/:id',
-            builder: (context, state) => PracticalItemPage(
-              id: state.pathParameters['id']!,
-            ),
+            builder: (context, state) =>
+                PracticalItemPage(id: state.pathParameters['id']!),
           ),
           GoRoute(
             path: '/formulas',
-            builder: (context, state) => FormulasPage(
-              focusId: state.uri.queryParameters['focus'],
-            ),
+            builder: (context, state) =>
+                FormulasPage(focusId: state.uri.queryParameters['focus']),
           ),
           GoRoute(
             path: '/calc-guide',
@@ -125,15 +120,13 @@ class AppRouter {
           ),
           GoRoute(
             path: '/glossary',
-            builder: (context, state) => GlossaryPage(
-              initialId: state.uri.queryParameters['id'],
-            ),
+            builder: (context, state) =>
+                GlossaryPage(initialId: state.uri.queryParameters['id']),
           ),
           GoRoute(
             path: '/search',
-            builder: (context, state) => SearchPage(
-              initialQuery: state.uri.queryParameters['q'] ?? '',
-            ),
+            builder: (context, state) =>
+                SearchPage(initialQuery: state.uri.queryParameters['q'] ?? ''),
           ),
           GoRoute(
             path: '/sources',

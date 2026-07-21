@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SotongElec icon">
+  <defs>
+    <linearGradient id="badge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#143A66"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="220" fill="url(#badge)"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#1F6FEB" stroke-width="14"/>
+  <circle cx="256" cy="256" r="198" fill="none" stroke="#0D9488" stroke-width="6" opacity="0.85"/>
+  <path d="M140 318 C180 292 220 292 256 312 C292 292 332 292 372 318 L372 368 C332 346 292 346 256 366 C220 346 180 346 140 368 Z"
+        fill="#EEF2F7" stroke="#94A3B8" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M256 312 L256 366" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+  <g fill="none" stroke="#14B8A6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M128 210 H188"/><path d="M324 210 H384"/>
+    <path d="M188 210 V168 H230"/><path d="M324 210 V168 H282"/>
+    <path d="M128 250 H170"/><path d="M342 250 H384"/>
+  </g>
+  <circle cx="128" cy="210" r="10" fill="#1F6FEB"/>
+  <circle cx="384" cy="210" r="10" fill="#1F6FEB"/>
+  <circle cx="128" cy="250" r="8" fill="#14B8A6"/>
+  <circle cx="384" cy="250" r="8" fill="#14B8A6"/>
+  <circle cx="230" cy="168" r="8" fill="#14B8A6"/>
+  <circle cx="282" cy="168" r="8" fill="#14B8A6"/>
+  <path d="M278 118 L208 262 H248 L234 372 L304 228 H264 Z"
+        fill="url(#bolt)" stroke="#FDE68A" stroke-width="3" stroke-linejoin="round"/>
+</svg>

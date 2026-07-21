@@ -1,6 +1,7 @@
 import '../../models/content_meta.dart';
 import '../../models/learning_models.dart';
 import '../../core/constants/app_constants.dart';
+import 'lessons_expanded.dart';
 
 final _meta = ContentMeta(
   source: 'SotongElec 자체 작성 학습 콘텐츠 (공개 공학 원리 기반)',
@@ -426,5 +427,6 @@ class LessonsData {
         needsReview: true,
       ),
     ),
+    ...LessonsExpanded.all,
   ];
 }

@@ -20,16 +20,23 @@ class WrittenHubPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SectionTitle('필기 전체 학습'),
-          Text('등록 강의 ${Catalog.lessonCount}개 · 문제 ${Catalog.questionCount}문항'),
+          Text(
+            '등록 강의 ${Catalog.lessonCount}개 · 문제 ${Catalog.questionCount}문항 · '
+            '공식 ${Catalog.formulaCount}개',
+          ),
           const SizedBox(height: 12),
           ...SubjectsData.all.map((s) {
             final lessons = Catalog.lessonsBySubject(s.id);
+            final qs = Catalog.questionsBySubject(s.id);
+            final fs = Catalog.formulasBySubject(s.id);
             final rate = p.subjectProgress(s.id);
             return Card(
               child: ListTile(
                 title: Text(s.name),
                 subtitle: Text(
-                  '${s.description}\n강의 ${lessons.length} · 학습률 ${(rate * 100).toStringAsFixed(0)}%',
+                  '${s.description}\n'
+                  '강의 ${lessons.length} · 공식 ${fs.length} · 문제 ${qs.length} · '
+                  '학습률 ${(rate * 100).toStringAsFixed(0)}%',
                 ),
                 isThreeLine: true,
                 trailing: const Icon(Icons.chevron_right),
@@ -60,6 +67,11 @@ class SubjectPage extends StatelessWidget {
         children: [
           SectionTitle(subject?.name ?? subjectId),
           Text(subject?.description ?? ''),
+          Text(
+            '강의 ${lessons.length} · '
+            '공식 ${Catalog.formulasBySubject(subjectId).length} · '
+            '문제 ${Catalog.questionsBySubject(subjectId).length}',
+          ),
           const SizedBox(height: 8),
           Text('대단원: ${subject?.chapters.join(' · ') ?? ''}'),
           const SizedBox(height: 16),
@@ -144,31 +156,49 @@ class _LessonPageState extends State<LessonPage> {
                 const StatusBadge(label: '최신 기준 검토 필요', needsReview: true),
             ],
           ),
-          const SectionTitle('학습목표'),
+          const SectionTitle('1. 이번 강의에서 배울 내용'),
           ...lesson.objectives.map((o) => Text('· $o')),
-          const SectionTitle('핵심 요약'),
+          if (lesson.prerequisites.isNotEmpty) ...[
+            const Text('선수 지식'),
+            ...lesson.prerequisites.map((p) => Text('· $p')),
+          ],
+          const SectionTitle('2. 한눈에 보는 핵심'),
           Text(lesson.summary),
-          const SectionTitle('상세 이론'),
+          const SectionTitle('3. 개념 이해'),
+          if (lesson.easyExplain.isNotEmpty) ...[
+            Text(lesson.easyExplain, style: const TextStyle(height: 1.45)),
+            const SizedBox(height: 8),
+          ],
           Text(lesson.theory),
-          const SectionTitle('공식'),
+          if (lesson.confusableConcepts.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            const Text('혼동하기 쉬운 개념'),
+            ...lesson.confusableConcepts.map((c) => Text('· $c')),
+          ],
+          const SectionTitle('4. 공식과 단위'),
           ...lesson.formulas.map((f) => FormulaBox(f)),
-          const SectionTitle('기호 · 단위'),
           ...lesson.symbolMeanings.entries.map(
             (e) => Text('${e.key}: ${e.value}'),
           ),
           ...lesson.units.entries.map((e) => Text('${e.key} 단위: ${e.value}')),
-          const SectionTitle('사용 조건 · 유도/원리'),
-          Text(lesson.conditions),
-          Text(lesson.derivation),
-          const SectionTitle('대표 예제 · 단계별 풀이'),
+          Text('적용 조건: ${lesson.conditions}'),
+          Text('유도/원리: ${lesson.derivation}'),
+          const SectionTitle('5. 대표 예제'),
           Text(lesson.example),
+          const SectionTitle('6. 단계별 풀이'),
           ...lesson.steps.asMap().entries.map(
             (e) => Text('${e.key + 1}. ${e.value}'),
           ),
-          const SectionTitle('자주 틀리는 부분 · 현장 활용'),
+          if (lesson.examTrends.isNotEmpty) ...[
+            const SectionTitle('7. 시험에 자주 나오는 부분'),
+            ...lesson.examTrends.map((t) => Text('· $t')),
+          ],
+          const SectionTitle('8. 자주 틀리는 부분'),
           ...lesson.commonMistakes.map((m) => Text('· $m')),
+          const SectionTitle('9. 실기·현장 연결'),
           Text(lesson.fieldUse),
-          const SectionTitle('확인 문제 · 관련 자료'),
+          if (lesson.practicalLink.isNotEmpty) Text(lesson.practicalLink),
+          const SectionTitle('10. 확인 문제'),
           Wrap(
             spacing: 8,
             children: [
@@ -178,10 +208,28 @@ class _LessonPageState extends State<LessonPage> {
                   onPressed: () => context.go('/questions?id=$id'),
                 ),
               ),
+            ],
+          ),
+          const SectionTitle('11. 관련 학습'),
+          Wrap(
+            spacing: 8,
+            children: [
               ...lesson.relatedFormulaIds.map(
                 (id) => ActionChip(
                   label: Text('공식 $id'),
                   onPressed: () => context.go('/formulas?focus=$id'),
+                ),
+              ),
+              ...lesson.relatedQuestionIds.map(
+                (id) => ActionChip(
+                  label: Text('문제 $id'),
+                  onPressed: () => context.go('/questions?id=$id'),
+                ),
+              ),
+              ...lesson.relatedTermIds.map(
+                (id) => ActionChip(
+                  label: Text('용어 $id'),
+                  onPressed: () => context.go('/glossary?id=$id'),
                 ),
               ),
             ],

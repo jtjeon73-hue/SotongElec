@@ -1,6 +1,7 @@
 import '../../models/content_meta.dart';
 import '../../models/learning_models.dart';
 import '../../core/constants/app_constants.dart';
+import 'formulas_expanded.dart';
 
 class FormulasData {
   static final List<FormulaItem> all = [
@@ -357,5 +358,6 @@ class FormulasData {
       relatedLessonIds: ['cc_ac_power'],
       relatedQuestionIds: ['q_cc_01'],
     ),
+    ...FormulasExpanded.all,
   ];
 }

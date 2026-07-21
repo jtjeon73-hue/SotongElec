@@ -7,13 +7,21 @@ library;
 class AppConstants {
   static const String appName = 'SotongElec';
   static const String appSubtitle = '전기기사 합격 학습관';
-  static const String contentVersion = '1.0.0';
+  static const String contentVersion = '2.0.0';
   static const String lastContentUpdate = '2026-07-21';
 
   /// Q-Net 출제기준 적용 기간 (공개 자료 기준)
   static const String examStandardPeriod = '2024.1.1. ~ 2026.12.31.';
-  static const String examStandardSource = 'https://www.q-net.or.kr (출제기준 자료실)';
+  static const String examStandardSource =
+      'https://www.q-net.or.kr (출제기준 자료실, 전기기사 출제기준)';
   static const String qnetUrl = 'https://www.q-net.or.kr';
+  static const String examStandardNote =
+      '필기 5과목·과목당 20문항·과목당 30분·과목 40점 이상·평균 60점 이상, '
+      '실기 전기설비설계 및 관리(필답형)·150분·60점 이상. '
+      '세부 범위는 Q-Net 출제기준(2024.1.1.~2026.12.31.)을 재확인하세요.';
+  static const String kecNote =
+      '전기설비기술기준 과목은 KEC 반영 흐름입니다. '
+      '구체적 수치·시설기준은 법령·KEC 최신본과 Q-Net 자료를 우선합니다.';
 
   /// 필기: 과목당 20문항, 과목당 30분 (기사 등급 일반 기준)
   static const int writtenQuestionsPerSubject = 20;

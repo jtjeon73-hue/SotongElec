@@ -16,6 +16,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   late final TextEditingController _controller;
   List<SearchHit> hits = [];
+  String? _type;
 
   @override
   void initState() {
@@ -48,12 +49,34 @@ class _SearchPageState extends State<SearchPage> {
             onSubmitted: (v) => setState(() => hits = SearchService.search(v)),
           ),
           const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            children: [
+              for (final t in [null, '강의', '공식', '문제', '실기', '용어', '계산기'])
+                FilterChip(
+                  label: Text(t ?? '전체'),
+                  selected: _type == t,
+                  onSelected: (_) => setState(() {
+                    _type = t;
+                    hits = SearchService.search(
+                      _controller.text,
+                      contentType: _type,
+                    );
+                  }),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
           FilledButton(
-            onPressed: () =>
-                setState(() => hits = SearchService.search(_controller.text)),
+            onPressed: () => setState(
+              () => hits = SearchService.search(
+                _controller.text,
+                contentType: _type,
+              ),
+            ),
             child: const Text('검색'),
           ),
-          Text('${hits.length}건'),
+          Text('검색 결과 ${hits.length}건'),
           ...hits.map(
             (h) => Card(
               child: ListTile(
@@ -63,8 +86,10 @@ class _SearchPageState extends State<SearchPage> {
                   [
                     h.subtitle,
                     if (h.importance != null) h.importance!,
+                    if (h.snippet != null) h.snippet!,
                   ].join(' · '),
                 ),
+                isThreeLine: h.snippet != null,
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () => context.go(h.route),
               ),

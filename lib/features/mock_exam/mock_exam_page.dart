@@ -203,8 +203,10 @@ class _MockExamPageState extends State<MockExamPage> {
               q.choices.length,
               (i) => RadioListTile<int>(
                 value: i,
+                // ignore: deprecated_member_use
                 groupValue: answers[q.id],
                 title: Text(q.choices[i]),
+                // ignore: deprecated_member_use
                 onChanged: (v) => setState(() => answers[q.id] = v!),
               ),
             ),

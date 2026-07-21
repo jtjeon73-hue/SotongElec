@@ -26,6 +26,14 @@ class Lesson {
     required this.relatedFormulaIds,
     required this.relatedQuestionIds,
     this.meta,
+    this.track = 'written',
+    this.prerequisites = const [],
+    this.easyExplain = '',
+    this.examTrends = const [],
+    this.confusableConcepts = const [],
+    this.practicalLink = '',
+    this.relatedTermIds = const [],
+    this.tags = const [],
   });
 
   final String id;
@@ -52,6 +60,16 @@ class Lesson {
   final List<String> relatedFormulaIds;
   final List<String> relatedQuestionIds;
   final ContentMeta? meta;
+
+  /// written | practical
+  final String track;
+  final List<String> prerequisites;
+  final String easyExplain;
+  final List<String> examTrends;
+  final List<String> confusableConcepts;
+  final String practicalLink;
+  final List<String> relatedTermIds;
+  final List<String> tags;
 }
 
 class FormulaItem {
@@ -73,6 +91,9 @@ class FormulaItem {
     required this.relatedLessonIds,
     required this.relatedQuestionIds,
     this.writtenPracticalLinked = false,
+    this.readable = '',
+    this.steps = const [],
+    this.tags = const [],
   });
 
   final String id;
@@ -92,6 +113,11 @@ class FormulaItem {
   final List<String> relatedLessonIds;
   final List<String> relatedQuestionIds;
   final bool writtenPracticalLinked;
+
+  /// 사람이 읽기 쉬운 수식 표현
+  final String readable;
+  final List<String> steps;
+  final List<String> tags;
 }
 
 class Question {
@@ -120,6 +146,8 @@ class Question {
     required this.reviewedAt,
     required this.verifiedAt,
     this.needsReview = false,
+    this.estimatedSeconds = 90,
+    this.choiceExplanations = const [],
   });
 
   final String id;
@@ -146,6 +174,10 @@ class Question {
   final String reviewedAt;
   final String verifiedAt;
   final bool needsReview;
+  final int estimatedSeconds;
+
+  /// 보기별 해설(선택). 길이가 choices와 같으면 UI에서 표시.
+  final List<String> choiceExplanations;
 
   bool isCorrect(int selected) => selected == answerIndex;
 }

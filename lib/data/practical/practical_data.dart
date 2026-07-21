@@ -1,4 +1,5 @@
 import '../../models/learning_models.dart';
+import 'practical_expanded.dart';
 
 class PracticalData {
   static final List<PracticalItem> all = [
@@ -137,5 +138,6 @@ class PracticalData {
       solutionOrder: ['인입', '보호', '변압', '배전'],
       relatedLessonIds: ['pe_short_circuit'],
     ),
+    ...PracticalExpanded.all,
   ];
 }

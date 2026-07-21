@@ -1,8 +1,9 @@
 import '../../models/learning_models.dart';
 import '../../core/constants/app_constants.dart';
+import 'glossary_expanded.dart';
 
 class GlossaryData {
-  static final List<GlossaryTerm> all = [
+  static final List<GlossaryTerm> _seed = [
     GlossaryTerm(
       id: 'g_voltage',
       korean: '전압',
@@ -201,6 +202,13 @@ class GlossaryData {
       unit: '',
       simple: '에너지원 차단 후 잠그고 표시하는 안전절차.',
       technical: '사업장 절차·법령이 우선.',
+    ),
+  ];
+
+  static final List<GlossaryTerm> all = [
+    ..._seed,
+    ...GlossaryExpanded.all.where(
+      (t) => !_seed.any((e) => e.korean == t.korean),
     ),
   ];
 }

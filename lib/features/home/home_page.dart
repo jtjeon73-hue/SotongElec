@@ -17,9 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final p = context.watch<StudyProgressController>();
     final readiness = p.readinessScore();
-    final days = p.examDate == null
-        ? null
-        : p.examDate!.difference(DateTime.now()).inDays;
+    final days = p.examDate?.difference(DateTime.now()).inDays;
     final formula =
         Catalog.formulas[DateTime.now().day % Catalog.formulas.length];
     final knowledge =
@@ -56,8 +54,10 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   '등록 콘텐츠 · 강의 ${Catalog.lessonCount} · 공식 ${Catalog.formulaCount} · '
-                  '문제 ${Catalog.questionCount} · 용어 ${Catalog.termCount} · '
-                  '계산기 ${Catalog.calculatorCount}',
+                  '문제 ${Catalog.questionCount} · 실기 ${Catalog.practicalCount} · '
+                  '단답 ${Catalog.practicalShortAnswerCount} · 실기계산 ${Catalog.practicalCalcCount} · '
+                  '용어 ${Catalog.termCount} · 계산기 ${Catalog.calculatorCount}\n'
+                  '검토완료 추정 ${Catalog.reviewedContentCount} · 재확인필요 ${Catalog.needsReviewCount}',
                   style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                 width: 220,
                 child: StatTile(
                   label: '합격 준비도',
-                  value: '${readiness.toStringAsFixed(0)}',
+                  value: readiness.toStringAsFixed(0),
                   subtitle: '참고 지표',
                   color: AppColors.practicalAccent,
                 ),

@@ -1,6 +1,7 @@
 import '../../models/content_meta.dart';
 import '../../models/learning_models.dart';
 import '../../core/constants/app_constants.dart';
+import 'questions_expanded.dart';
 
 /// 자체 작성 기출유형 연습문제 (특정 기출 원문 복제 아님)
 class QuestionsData {
@@ -414,5 +415,6 @@ class QuestionsData {
       reviewedAt: _created,
       verifiedAt: _created,
     ),
+    ...QuestionsExpanded.all,
   ];
 }

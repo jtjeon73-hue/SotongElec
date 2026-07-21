@@ -55,7 +55,8 @@ Path URL 전략을 사용합니다. 하위 경로 새로고침은 Firebase Hosti
 
 ```bash
 dart format .
-flutter analyze --no-fatal-infos
+dart run tool/validate_content.dart
+flutter analyze
 flutter test
 flutter build web --release
 ```
@@ -89,14 +90,25 @@ firebase deploy --only hosting --project sotong-elec
 
 ## 콘텐츠 추가법
 
-- 강의: `lib/data/lessons/lessons_data.dart`
-- 공식: `lib/data/formulas/formulas_data.dart`
-- 문제: `lib/data/questions/questions_data.dart`
-- 실기: `lib/data/practical/practical_data.dart`
-- 전기상식: `lib/data/electrical_knowledge/knowledge_data.dart`
-- 용어: `lib/data/glossary/glossary_data.dart`
+상세 지침:
 
-모델 필드를 맞추고 `Catalog`가 자동으로 집계합니다.
+- [docs/content-guide.md](docs/content-guide.md)
+- [docs/question-authoring-guide.md](docs/question-authoring-guide.md)
+- [docs/source-policy.md](docs/source-policy.md)
+
+데이터 파일:
+
+- 강의: `lib/data/lessons/lessons_data.dart` (+ `lessons_expanded.dart`)
+- 공식: `lib/data/formulas/formulas_data.dart` (+ `formulas_expanded.dart`)
+- 문제: `lib/data/questions/questions_data.dart` (+ `questions_expanded.dart`)
+- 실기: `lib/data/practical/practical_data.dart` (+ `practical_expanded.dart`)
+- 전기상식: `lib/data/electrical_knowledge/knowledge_data.dart`
+- 용어: `lib/data/glossary/glossary_data.dart` (+ `glossary_expanded.dart`)
+
+대량 생성: `python tool/generate_expanded_content.py`  
+검증: `dart run tool/validate_content.dart` (오류 시 배포 금지)
+
+모델 필드를 맞추고 `Catalog`가 자동으로 집계합니다. **기존 ID는 변경하지 마세요.**
 
 ## 법령·출제기준 업데이트
 

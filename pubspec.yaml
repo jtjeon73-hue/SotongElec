@@ -1,0 +1,32 @@
+name: sotong_elec
+description: "SotongElec — 전기기사 합격 학습관"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  go_router: ^17.3.0
+  shared_preferences: ^2.5.5
+  provider: ^6.1.5+1
+  intl: ^0.20.3
+  flutter_math_fork: ^0.7.4
+  uuid: ^4.6.0
+  collection: ^1.19.1
+  fl_chart: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/

@@ -95,6 +95,10 @@ firebase deploy --only hosting --project sotong-elec
 - [docs/content-guide.md](docs/content-guide.md)
 - [docs/question-authoring-guide.md](docs/question-authoring-guide.md)
 - [docs/source-policy.md](docs/source-policy.md)
+- [docs/technical-content-quality-standard.md](docs/technical-content-quality-standard.md)
+- [docs/content-quality-report.md](docs/content-quality-report.md)
+
+교재형 대표 강의는 `lib/data/lessons/lessons_flagship.dart`에서 기존 ID를 덮어씁니다.
 
 데이터 파일:
 

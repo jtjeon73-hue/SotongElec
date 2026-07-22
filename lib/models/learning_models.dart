@@ -34,6 +34,17 @@ class Lesson {
     this.practicalLink = '',
     this.relatedTermIds = const [],
     this.tags = const [],
+    this.whyNeeded = '',
+    this.keyTerms = const [],
+    this.measurement = '',
+    this.wrongCases = const [],
+    this.hazards = const [],
+    this.diagnosisSteps = const [],
+    this.safetyNotes = const [],
+    this.checkProblem = '',
+    this.checkSolution = '',
+    this.keyTakeaways = const [],
+    this.qualityTier = '',
   });
 
   final String id;
@@ -70,6 +81,21 @@ class Lesson {
   final String practicalLink;
   final List<String> relatedTermIds;
   final List<String> tags;
+
+  /// 교재형 보강 필드(비어 있으면 UI에서 생략)
+  final String whyNeeded;
+  final List<String> keyTerms;
+  final String measurement;
+  final List<String> wrongCases;
+  final List<String> hazards;
+  final List<String> diagnosisSteps;
+  final List<String> safetyNotes;
+  final String checkProblem;
+  final String checkSolution;
+  final List<String> keyTakeaways;
+
+  /// A/B/C/D — 수동 검수 등급. 비어 있으면 미지정.
+  final String qualityTier;
 }
 
 class FormulaItem {

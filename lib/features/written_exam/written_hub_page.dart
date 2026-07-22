@@ -162,14 +162,22 @@ class _LessonPageState extends State<LessonPage> {
             const Text('선수 지식'),
             ...lesson.prerequisites.map((p) => Text('· $p')),
           ],
+          if (lesson.whyNeeded.isNotEmpty) ...[
+            const SectionTitle('이 기술이 필요한 이유'),
+            Text(lesson.whyNeeded, style: const TextStyle(height: 1.45)),
+          ],
           const SectionTitle('2. 한눈에 보는 핵심'),
-          Text(lesson.summary),
+          Text(lesson.summary, style: const TextStyle(height: 1.45)),
+          if (lesson.keyTerms.isNotEmpty) ...[
+            const SectionTitle('핵심 용어'),
+            ...lesson.keyTerms.map((t) => Text('· $t')),
+          ],
           const SectionTitle('3. 개념 이해'),
           if (lesson.easyExplain.isNotEmpty) ...[
             Text(lesson.easyExplain, style: const TextStyle(height: 1.45)),
             const SizedBox(height: 8),
           ],
-          Text(lesson.theory),
+          Text(lesson.theory, style: const TextStyle(height: 1.5)),
           if (lesson.confusableConcepts.isNotEmpty) ...[
             const SizedBox(height: 8),
             const Text('혼동하기 쉬운 개념'),
@@ -184,11 +192,36 @@ class _LessonPageState extends State<LessonPage> {
           Text('적용 조건: ${lesson.conditions}'),
           Text('유도/원리: ${lesson.derivation}'),
           const SectionTitle('5. 대표 예제'),
-          Text(lesson.example),
+          Text(lesson.example, style: const TextStyle(height: 1.45)),
           const SectionTitle('6. 단계별 풀이'),
           ...lesson.steps.asMap().entries.map(
-            (e) => Text('${e.key + 1}. ${e.value}'),
+            (e) => Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text('${e.key + 1}. ${e.value}'),
+            ),
           ),
+          if (lesson.measurement.isNotEmpty) ...[
+            const SectionTitle('측정 방법'),
+            Text(lesson.measurement, style: const TextStyle(height: 1.45)),
+          ],
+          if (lesson.wrongCases.isNotEmpty) ...[
+            const SectionTitle('잘못된 계산·결선 사례'),
+            ...lesson.wrongCases.map((w) => Text('· $w')),
+          ],
+          if (lesson.hazards.isNotEmpty) ...[
+            const SectionTitle('예상 증상과 위험'),
+            ...lesson.hazards.map((h) => Text('· $h')),
+          ],
+          if (lesson.diagnosisSteps.isNotEmpty) ...[
+            const SectionTitle('점검·진단 순서'),
+            ...lesson.diagnosisSteps.asMap().entries.map(
+              (e) => Text('${e.key + 1}. ${e.value}'),
+            ),
+          ],
+          if (lesson.safetyNotes.isNotEmpty) ...[
+            const SectionTitle('안전 주의사항'),
+            ...lesson.safetyNotes.map((s) => Text('· $s')),
+          ],
           if (lesson.examTrends.isNotEmpty) ...[
             const SectionTitle('7. 시험에 자주 나오는 부분'),
             ...lesson.examTrends.map((t) => Text('· $t')),
@@ -196,9 +229,16 @@ class _LessonPageState extends State<LessonPage> {
           const SectionTitle('8. 자주 틀리는 부분'),
           ...lesson.commonMistakes.map((m) => Text('· $m')),
           const SectionTitle('9. 실기·현장 연결'),
-          Text(lesson.fieldUse),
+          Text(lesson.fieldUse, style: const TextStyle(height: 1.45)),
           if (lesson.practicalLink.isNotEmpty) Text(lesson.practicalLink),
-          const SectionTitle('10. 확인 문제'),
+          if (lesson.checkProblem.isNotEmpty) ...[
+            const SectionTitle('확인문제'),
+            Text(lesson.checkProblem, style: const TextStyle(height: 1.45)),
+            const SizedBox(height: 8),
+            Text('풀이·정답 근거', style: Theme.of(context).textTheme.titleSmall),
+            Text(lesson.checkSolution, style: const TextStyle(height: 1.45)),
+          ],
+          const SectionTitle('10. 관련 확인 문제'),
           Wrap(
             spacing: 8,
             children: [
@@ -210,6 +250,10 @@ class _LessonPageState extends State<LessonPage> {
               ),
             ],
           ),
+          if (lesson.keyTakeaways.isNotEmpty) ...[
+            const SectionTitle('핵심 정리'),
+            ...lesson.keyTakeaways.map((k) => Text('· $k')),
+          ],
           const SectionTitle('11. 관련 학습'),
           Wrap(
             spacing: 8,
@@ -234,6 +278,11 @@ class _LessonPageState extends State<LessonPage> {
               ),
             ],
           ),
+          if (lesson.qualityTier.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Chip(label: Text('품질 등급 ${lesson.qualityTier}')),
+            ),
           const SectionTitle('학습 완료 · 즐겨찾기 · 메모'),
           Wrap(
             spacing: 8,

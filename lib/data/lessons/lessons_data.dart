@@ -2,6 +2,7 @@ import '../../models/content_meta.dart';
 import '../../models/learning_models.dart';
 import '../../core/constants/app_constants.dart';
 import 'lessons_expanded.dart';
+import 'lessons_flagship.dart';
 
 final _meta = ContentMeta(
   source: 'SotongElec 자체 작성 학습 콘텐츠 (공개 공학 원리 기반)',
@@ -13,7 +14,7 @@ final _meta = ContentMeta(
 );
 
 class LessonsData {
-  static final List<Lesson> all = [
+  static final List<Lesson> _seedAndExpanded = [
     // —— 전기자기학 ——
     Lesson(
       id: 'em_coulomb',
@@ -429,4 +430,13 @@ class LessonsData {
     ),
     ...LessonsExpanded.all,
   ];
+
+  /// 플래그십(교재형) ID가 있으면 동일 ID를 덮어쓴다. 순서·개수는 유지.
+  static final List<Lesson> all = [
+    for (final lesson in _seedAndExpanded) _flagshipById[lesson.id] ?? lesson,
+  ];
+
+  static final Map<String, Lesson> _flagshipById = {
+    for (final lesson in LessonsFlagship.all) lesson.id: lesson,
+  };
 }
